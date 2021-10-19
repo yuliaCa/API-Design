@@ -17,4 +17,4 @@ app.get('/',(req,res)=>{
 
 
 const router = require('./routes/index');
-app.use('/api/v1/', router);
+app.use('/api/v1', router);
