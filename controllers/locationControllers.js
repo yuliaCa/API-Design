@@ -21,7 +21,7 @@ const postLocation = (req,res)=>{
 const getLocations = (req, res) => {
     Location.find({}).exec()
         .then(results => {
-            res.status(201).json(results)
+            res.status(200).json(results)
         })
         .catch(error=>res.status(500).send(error))
 
@@ -30,7 +30,7 @@ const getLocations = (req, res) => {
 const getTheLocation = (req, res) => {
     Location.findOne({ "_id": req.params.id }).exec()
         .then(results => {
-            res.status(201).json(results)
+            res.status(200).json(results)
         })
         .catch(error => res.status(500).send(error))
 }
