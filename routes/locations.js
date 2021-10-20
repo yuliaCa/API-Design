@@ -1,16 +1,10 @@
 const router = require('express').Router();
-// const { getTheLocation, getAllLocations, postLocation } = require('../controllers/locationController.js');
+const { postLocation,getLocations,getTheLocation } = require('../controllers/locationControllers.js');
 
-router.get('/', (req,res)=>{
-    res.send('Locations All')
-})
+router.get('/', getLocations)
 
-router.get('/:id', (req,res)=>{
-    res.send(`Locations ID ${req.params.id}`)
-})
+router.get('/:id', getTheLocation)
 
-router.post('/', (req,res)=>{
-    res.json(req.body)
-})
+router.post('/',postLocation )
 
 module.exports = router;

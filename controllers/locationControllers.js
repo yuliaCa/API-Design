@@ -1,38 +1,42 @@
-// const Location = require('../models/Animal');
+const Location = require('../models/Location.js');
 
-// const postAnimal = (req, res) => {
-//     let newAnimal = new Animal({
-//         type: req.body.type,
-//         numberOfLegs: req.body.numberOfLegs
-//     })
-//     newAnimal.save()
-//         .then(result => {
-//             res.json({
-//                 data: newAnimal,
-//                 url: `/api/animals/${newAnimal._id}`
-//             })
-//         })
-//         .catch(error => res.status(500).send(error))
-// }
+const postLocation = (req,res)=>{
+    let location = new Location({
+        name: req.body.name,
+        description:req.body.description
+        }); 
+    location.save()
+.then(result=>{
+    res.set('content-location', `/api/v1/locations/${location._id}`);
+    res.status(201).json({
+    data:location,
+    url:`/api/v1/locations/${location._id}`
 
-// const getAnimal = (req, res) => {
-//     Animal.find({}).exec()
-//         .then(results => {
-//             res.json(results)
-//         })
+    })}
+    ) 
+.catch(error=>{res.status(500).send(error)});
+}
 
-// }
 
-// const getOneAnimal = (req, res) => {
-//     Animal.findOne({ "_id": req.params.id }).exec()
-//         .then(results => {
-//             res.json(results)
-//         })
-//         .catch(error => res.status(500).send(error))
-// }
+const getLocations = (req, res) => {
+    Location.find({}).exec()
+        .then(results => {
+            res.status(201).json(results)
+        })
+        .catch(error=>res.status(500).send(error))
 
-// module.exports = {
-//     postAnimal,
-//     getAnimal,
-//     getOneAnimal
-// }
+}
+
+const getTheLocation = (req, res) => {
+    Location.findOne({ "_id": req.params.id }).exec()
+        .then(results => {
+            res.status(201).json(results)
+        })
+        .catch(error => res.status(500).send(error))
+}
+
+module.exports = {
+    postLocation,
+    getLocations,
+    getTheLocation
+}
