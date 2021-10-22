@@ -24,7 +24,7 @@ const postCharacter = function (req,res){
 
 const getHeroes = (req, res,next) => {
     if (req.params.type === 'heroes'){
-    Character.findByType("hero").exec()
+    Character.findByType("hero").select("name _id").exec()
         .then(allHeroes => {
             res.status(200).json(allHeroes)
         })
@@ -34,7 +34,7 @@ const getHeroes = (req, res,next) => {
 
 const getVillains = (req, res) => {
     if(req.params.type === 'villains'){
-    Character.findByType("villain").exec()
+    Character.findByType("villain").select("name _id").exec()
         .then(allVillains => {
             res.status(200).json(allVillains)
         })
@@ -43,8 +43,17 @@ const getVillains = (req, res) => {
 }
 
 const getTheCharacter = (req, res) => {
+
 Character.findOne({ "_id": req.params.id }).exec()
         .then(results => {
+            results = {
+                id: results._id,
+                name:results.name,
+                powers: results.powers,
+                type:results.type,
+                hp:results.hp,
+                description: results.description
+            }
             res.status(200).json(results)
             
         })

@@ -20,9 +20,10 @@ CharacterSchema.virtual('description').get(function(){
 
 CharacterSchema.static('findByType', function(charType) { return this.find({ "type":charType }); });
 
-CharacterSchema.set('toJSON', {
-    virtuals: true
-});
+// CharacterSchema.set('toJSON', {
+//     virtuals: true
+// });
+
 const Character = mongoose.model("Character", CharacterSchema); 
 
 module.exports = Character;
